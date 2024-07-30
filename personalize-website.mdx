@@ -1,0 +1,250 @@
+---
+title: Personalize website
+label: Personalize website
+boost: 45
+featured: true
+---
+
+import {Callout} from 'nextra/components'
+import Caption from '@/components/caption'
+import MuxPlayer from '@mux/mux-player-react'
+import { FaUsers, FaPhone } from "react-icons/fa6";
+import {PrBullseyeArrow} from '@/components/icons'
+import Boost from '@/components/boost'
+
+
+<Boost boosted={75}/>
+
+# Personalize website
+
+*This guide shows you how to add personalization in Prepr to improve website engagement and user experience.*
+
+<Callout type="info">
+
+This guide is focused on the typical personalization activities of a marketer. Check out the [set up personalization guide for developers](/personalization) for the one-time setup in the front-end app.
+
+</Callout>
+<br/>
+
+<MuxPlayer playbackId={'016RQ49mSWkPzhaHugXf35KrvQGJrctWTz7sIITQgYQw'} thumbnail-time="0.1"/>
+
+<Caption 
+  text="This video was created using AI avatars and voices to ensure a consistent look and feel.
+   The use of AI matches our culture of using innovative technologies."
+  >
+  </Caption>
+
+## Introduction
+
+Deliver a personalized customer experience for your website or app visitors by using built-in Prepr features. Let's look at an everyday use case: We want a website visitor to see personalized content based on their clicking behavior. For example:
+
+1. Visitor 1 visits a bake shop website to find easy recipes. Let's classify them as a *beginner baker*. Then, when they visit the page below they see personalized content for beginner bakers.
+2. Visitor 2 looks for state-of-the-art kitchen equipment to replace the aging equipment in their bakery. Let's classify them as a *pro baker*. Then, when they visit the page below they see personalized content for pro bakers.
+3. Visitor 3 visits our bake shop website for the first time, so when they go to the page below, they see the generic variant of the page.
+
+![page variants](https://assets-site.prepr.io//1j5c83f8fjs1-example-variants-of-personalized-page.png)
+
+In the above example, the front end selects which variant of the page to render depending on the type of visitor, in our case, a beginner baker or a pro baker.
+
+You can then use an analytics tool like Google Analytics to measure the click-through rate for each personalized page and determine how well they perform against the non-personalized page.
+
+The example above is just one method for personalization. You could also personalize based on other characteristics such as age, gender, membership status, etc. In these cases, a visitor's Customer Id is assigned to a corresponding segment.
+
+You could even personalize based on criteria outside of the web app, for example, when a user visits your web app from a social media link. In this case you set up the segment to match a UTM tag on the redirect link. See an [example of this type of personalization in action](https://patterns.prepr.io/personalization).
+
+To personalize your website, you need to complete the following steps:
+
+[Step 1: Set up segments.](#step-1-set-up-segments) Set up segments based on specific visitor interaction on the content. These segments are the groups of visitors for whom you want to deliver a personalized experience.
+
+[Step 2: Personalize an element.](#step-2-create-and-personalize-a-stack-field) For each segment, create content specifically aimed at those groups of visitors.
+
+{/* [Step 3: Get the HTML attributes for analytics.](#step-3-get-the-html-attributes-for-analytics)
+Get the HTML attributes of the personalized elements from the front end.
+
+[Step 4: Set up analytics.](#step-4-set-up-analytics) Using your preferred analytics tool, measure and compare click-through-rates for each of the personalized variants. */}
+
+[Step 3: Evaluate the personalized variants.](#step-5-evaluate-the-personalized-variants) Prepr collects metrics on the performance of the personalized pages. You can use this data to improve on your personalized pages and/or criteria.
+
+## Prerequisites
+
+To implement personalization for the above example, you need to have the following set up in Prepr beforehand:
+
+ - [A Prepr CMS account](https://signup.prepr.io/?plan=free)
+ - [An environment with demo data in Prepr](/set-up-your-project/set-up-environments#create-an-environment)
+
+We will make use of the *Home Page* content item from the demo data which is based on the [Page pattern](/model-content/examples/page-pattern).
+
+## Step 1: Set up segments
+
+Before implementing personalization you need to choose different target segments for your web app. In this example we have two segments: *Beginner bakers* and *Pro bakers*. If you’re using preloaded demo data in your Prepr environment as mentioned above in the [Prerequisites](#prerequisites) section, these are available in your Prepr environment. So, you only need to assign customers to the corresponding segment based on Prepr data as follows:
+
+1. Go to the **Segments** tab and click each segment to make an update.
+2. Update a segment by adding a condition to track when users viewed specific Prepr content items. For more details, check out the [Customer segments page](/segments#create-segments-based-on-prepr-data).
+
+
+For more information on how to manage segments, check out the [segments doc](/segments).
+
+By completing this step, you will have successfully grouped your web app visitors based on their clicking behavior.
+
+## Step 2: Personalize an element
+
+Now that you know for which visitors you want to personalize the experience, it's time to create specific content for each segment. In this case, you need three page headers: one for *Beginner bakers*, one for *Pro bakers*, and one for all other visitors.
+
+Go to the **Content** tab, click the *Home page* content item and add the personalization as follows:
+
+1. In the Stack, go to the *Page header* and click the <PrBullseyeArrow /> icon to add the personalization.
+2. In the *Personalization* box, duplicate the page header. The original page header will automatically be used as the fallback content and linked to *All other users*.
+3. Update the image and text for the *Beginner bakers* segment.
+4. Click the <FaUsers className="inline-icons"/> **Select audience** button and choose the *Beginner bakers* segment for this header. Note that it's also possible to limit this personalized header to a specific country.
+
+![personalization gif](https://downloads-site.prepr.io/6ncsi65ensjg-personalization.gif)
+
+5. (Optional) Drag and drop another content item or component into the personalization. This feature gives you a wide array of options when personalizing your content.
+6. Duplicate the original page header again and update the image and text for the *Pro bakers* segment. Repeat step 4 to link the *Pro bakers* segment to this page header.
+
+![create personalization](https://assets-site.prepr.io//3ywrut9o6r3i-home-page-with-personalization-updated-layout.png)
+
+At this point, you have successfully created personalized content.
+
+{/* ## Step 3: Get the HTML attributes for analytics
+
+If not already done, a front developer needs to apply a one-time setup to add tracking to the front end and render the correct variants to visitors as explained in the [set up personalization guide for developers](/personalization#step-3-add-personalization-to-the-front-end). Once the developer has completed this step, visitors will see personalized pages based on their clicking behavior in the website.
+
+From your browser, visit the page that was set up with personalization and right-click the personalized element. Select **Inspect** to get the HTML attribute value for the `id` of the personalized element and get the name of the *variant* HTML attribute like in the example below. Do the same for the `id` of the click element like a call to action link that you want to use to measure the CTR. You need to reference these attribute names accurately in the analytics tool in the next step to measure how well the personalized variants perform.
+
+```html copy
+<section id="PageHeader_b997e121-5a8a-4527-a4f5-431029bdf" 
+prepr-variant="PRO_BAKERS"  ...>
+  <div>
+    ...
+    <a id="cta_link_PageHeader_b997e121-5a8a-4527-a4f5-431029bdf" href="#" ... >...</a>
+  </div>
+</section>
+```
+
+
+## Step 4: Set up analytics
+
+Prepr Personalization works with any analytics tool. If you already have your analytics tool set up to measure visitor interactions on your web app, please adapt the following explanation to your specific case.
+
+In this example, we show you how to measure visitor interactions on each personalized variant using GA4 and GTM.
+
+### Set up GTM
+
+1. If not already done, work together with the front-end developer to connect GA4 and GTM to the web app by following the [GA4 and GTM setup process](https://support.google.com/analytics/answer/9304153?hl=en).
+2. In GTM, [create a custom variable](https://support.google.com/tagmanager/answer/7683362?hl=en#aev) and set the *Attribute name* to the name of the *variant* HTML attribute that you found in the previous step.
+
+![personalized-variant variable](https://assets-site.prepr.io//22gko6u3b1cl-screenshot-2023-07-18-at-121609.png)
+
+### Create impression and click events in GTM
+
+1. [Create tags in GTM](https://support.google.com/analytics/answer/12229021?hl=en) for the following events:
+  - An element visibility event that fires when the page header section is 100% visible to the visitor. 
+
+![Element visibility tag](https://assets-site.prepr.io//475vai3qjk7n-screenshot-2023-07-18-at-152613.png)
+
+Make sure that the visibility trigger as shown in the image below has the same *Element ID* value as the HTML attribute `id` value of the personalized element that you found in the previous step.
+
+![Element visibility trigger](https://assets-site.prepr.io//6bxvqu0rnxc3-screenshot-2023-07-18-at-152752.png)
+
+  - A click link event that fires when a user clicks the CTA link.
+
+![Click link tag](https://assets-site.prepr.io//9qxchwyc4w-screenshot-2023-07-18-at-153838.png)
+Make sure that the click trigger as shown in the image below has the same *Click ID* value as the HTML attribute `id` value of the CTA element that you found in the previous step.
+
+![Click trigger](https://assets-site.prepr.io//6l9vc7t9wvp1-screenshot-2023-07-18-at-153628.png)
+
+2. Test your events by clicking on the *Preview* button and enter the URL of the web app that you want to test.
+
+![preview tag assistant](https://assets-site.prepr.io//44eya5eumc72-screenshot-2023-05-02-at-173220.png)
+
+3. If the tags are firing successfully and the variables are being populated as expected from the front end, click the **Submit** button to publish these tags to your web app.
+
+![submit -publish changes](https://assets-site.prepr.io//1wg4ck1rp468-screenshot-2023-05-04-at-162458.png)
+
+### Create reports in GA4
+
+1. [Create a custom dimension in GA4](https://support.google.com/analytics/answer/10075209?hl=en&ref_topic=11151952) so that the variant parameter is available for detailed reporting in Google Analytics.
+<img alt="Custom dimension" src="https://assets-site.prepr.io//4i5hk3vzluhf-screenshot-2023-07-20-at-144513.png" width="50%" />
+
+2. Create a *Funnel exploration* in GA4.  Click on the **+** button for *DIMENSIONS* to add the custom dimension *Personalized variant*. Add *STEPS* for the visibility and click events and specify a *BREAKDOWN* by the custom dimension.
+![Funnel exploration](https://assets-site.prepr.io//7d66m253zs8g-personalization-funnel-exploration.png)
+
+While personalization is enabled, the reporting in your analytics tool will eventually show significant results on the variants. */}
+
+## Step 3: Evaluate the personalized variants
+
+The last step is to check how well the personalized variants performed. In this example, you will compare the CTR of a personalized variant with the CTR of the control variant (`FOR_ALL_USERS`).
+
+Click the **Metrics** link to open the Metrics modal. If your personalization has been running for a while, you should
+see some significant results like in the image below:
+
+{/* 
+1. Fill the values for *Visitors A* and *Visitors B* fields as follows:
+
+- *Visitors A*:  Use the number of users that visited the page from a previous period before the personalization was implemented.
+
+- *Visitors B*: From the personalization report created above, copy the number of users from the *Personalization impressions* for one of the personalized variants.
+
+2. Fill the values for the *Conversions A* and *Conversions B* as follows:
+
+- *Conversions A*: Use the number of users that completed the same click event on the page from a previous period before the personalization was implemented. 
+- *Conversions B*: From the personalization report created above, copy the number of users who completed the click event for the same personalized variant used for the *Visitors B* field.
+
+3. After you apply the changes, this calculator indicates if your result is significant or not and the conversion rate of the non-personalized variant before personalization versus  the conversion rate of your personalized variant.
+
+4. Repeat these steps for each personalized variant to understand how well each variant performed.
+
+![online calculator](https://assets-site.prepr.io//32u3gqdmbd57-screenshot-2023-05-04-at-162901.png) */}
+
+{/* Include screenshot */}
+
+Congratulations, you have successfully implemented Personalization and used it to improve the customer experience on your web app.
+
+## Other use cases
+
+This guide explains just one use case for personalization. Below we list a few more common options.
+
+### Segments from external CRM/CDP systems
+
+It is possible to personalize Prepr content based on segments maintained in other CDP/CRM systems or segments based on UTM tags (for instance from an ad campaign). This means that customer data doesn't have to be imported into Prepr. In this case, you need to reference these external segments from within Prepr using the segment unique identifier from that system or the UTM tag.
+
+Your personalization flow will look like this:
+
+1. [Create a new segment in Prepr](/segments#use-external-segments-from-crmcdp-systems) and set the *ID* value to the segment unique identifier copied from your CRM/CDP system or the UTM tag.
+
+2. Personalize an element. See [Step 2](#step-2-create-and-personalize-a-stack-field) from the instructions above.
+
+3. Retrieve personalized content using the API as shown in [Step 3](#step-3-add-personalization-to-the-front-end) with one difference — you must pass the `Prepr-Segments` header instead of `Prepr-Customer-Id`. For more information, refer to our [API documentation](/graphql/personalization-recommendations-personalized-stack).
+
+<Callout type="info">
+
+You do not need to add tracking code to the front end in this case because the segments are based on outside criteria and not the visitor interaction on Prepr data.
+
+</Callout>
+
+4. If the segment is based on external customer data, ensure that your front end is connected to the external CRM/CDP system for data retrieval.
+
+### Call-to-actions
+
+Personalizing call-to-actions can significantly increase conversion rates. Offer each segment the call-to-action that fits best. For example, show a relevant whitepaper to first-time visitors and offer a demo to returning visitors.
+
+### Categories
+
+Do you have content or products in different categories? Capture which categories your visitors view and display them on the homepage on their next visit.
+
+## Want to learn more?
+
+Check out the following guides:
+
+* [Collect event data](/event-data)
+* [Manage segments](/segments)
+* [Recommendations](/run-ab-tests)
+
+
+## Schedule a free consultation
+
+Do you want to get started with personalization but still have questions or want a demo? 
+
+<FaPhone className="inline-icons"/> [Schedule a free call](https://calendly.com/bernardjan-boekholt/prepr-cms-introduction-call)
+ with a Prepr solution engineer.
